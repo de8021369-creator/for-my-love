@@ -7,7 +7,7 @@ const textOverlay = document.getElementById('text-overlay');
 const mainContent = document.getElementById('main-content');
 
 const settings = {
-    startDate: new Date('2025-04-14T21:00:00'), // ТВОЯ ДАТА
+    startDate: new Date('2025-04-17T21:00:00'), // ТВОЯ ДАТА
     messages: ["Ты — моя радость","Моя гордость❤️", "Спасибо тебе за всё!", "Я очень сильно тебя люблю❤️❤️","Ты - моя самая самая  лучшая лабубушечка❤️❤️❤️❤️", "С 14 февраля! ❤️"],
     introText: "Сейчас технологии зашли очень далеко. И так как в будущем я планирую стать программистом, я решил сделать валентинку в электронном формате. Надеюсь, тебе очень понравится ❤️",
     particleCount: 2500,
