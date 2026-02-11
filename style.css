@@ -1,0 +1,189 @@
+body, html {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background-color: #050002;
+    font-family: 'Arial', sans-serif;
+}
+
+#main-content {
+    width: 100%; height: 100%;
+    position: relative;
+    background-color: transparent;
+}
+
+/* Тот самый дымчатый фон с эффектом глубины */
+#glow-background {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(90, 0, 40, 0.4) 0%, transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(40, 0, 20, 0.3) 0%, transparent 50%),
+        #050002;
+    z-index: 0;
+    transition: all 2s ease-in-out;
+}
+
+#main-content.active #glow-background {
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(130, 0, 50, 0.6) 0%, transparent 70%),
+        #080004;
+}
+
+#intro-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4000;
+    background: #000;
+    transition: opacity 2s ease;
+}
+
+#typewriter {
+    color: #ffd1dc;
+    font-size: 1.5em;
+    text-align: center; /* Текст строго по центру */
+    max-width: 600px;
+    line-height: 1.6;
+    margin: 0 auto;
+    display: block; /* Теперь это просто блок */
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    min-height: 6em;
+}
+
+/* Стиль для нашего рукотворного курсора */
+.cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.2em;
+    background-color: #ff0055;
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blinkCursor 0.7s infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes blink { 50% { border-right-color: transparent; } }
+
+.hidden-logic { display: none !important; }
+.hidden { display: none; }
+
+#start-container {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    z-index: 3000;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 2s ease, transform 2s ease;
+    cursor: pointer;
+}
+
+#start-container.fade-in { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+#start-heart { font-size: 100px; animation: heartBeat 1.2s infinite; color: #ff0055; }
+#click-me { color: #ff80ab; margin-top: 15px; font-family: 'Caveat', cursive; font-size: 2.5em; }
+
+@keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+#heartCanvas { position: absolute; top: 0; left: 0; z-index: 1; transition: transform 2s ease-in-out; }
+
+#text-overlay {
+    position: absolute;
+    right: 10%; top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    width: 400px;
+    z-index: 10;
+    opacity: 0;
+    transition: 1.5s ease;
+}
+
+#text-overlay.visible { opacity: 1; }
+
+#headline { color: #ff0055; font-size: 3em; font-family: 'Caveat', cursive; margin-bottom: 20px; }
+.msg { color: #ffd1dc; font-size: 1.3em; margin: 15px 0; opacity: 0; transform: translateY(15px); transition: 1s; }
+.msg.show { opacity: 1; transform: translateY(0); }
+
+#show-timer-btn, #reset-btn {
+    margin-top: 25px;
+    background: rgba(255, 0, 85, 0.1);
+    border: 2px solid #ff0055;
+    color: #ff0055;
+    padding: 12px 25px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.6em;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.4s;
+}
+
+#show-timer-btn.show, #reset-btn.show { opacity: 1; }
+#timer { color: #ff80ab; font-size: 1.4em; margin-top: 20px; opacity: 0; transition: 1s; }
+#timer.show { opacity: 1; }
+
+#show-timer-btn:hover, #reset-btn:hover { background: #ff0055; color: #fff; box-shadow: 0 0 20px #ff0055; }
+/* Плавность для всех интерактивных элементов */
+#show-timer-btn, #reset-btn, #timer, .msg, #text-overlay {
+    transition: opacity 0.8s ease, transform 0.8s ease !important;
+}
+
+/* Специальный класс для мгновенного скрытия без анимации (если нужно для логики) */
+.hidden-logic {
+    display: none !important;
+}
+
+/* Класс для плавного проявления */
+.fade-in-element {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Начальное состояние кнопок (невидимы) */
+#show-timer-btn, #reset-btn, #timer {
+    opacity: 0;
+    pointer-events: none; /* Чтобы нельзя было нажать, пока не видно */
+}
+
+#show-timer-btn.show, #reset-btn.show, #timer.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+/* Плавность для всех элементов */
+#show-timer-btn, #reset-btn, #timer, .msg, #text-overlay, #start-container {
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Начальное состояние таймера — он чуть ниже и прозрачный */
+#timer {
+    margin-top: 30px; /* Увеличили отступ, чтобы не прилипал */
+    color: #ff80ab;
+    font-size: 1.4em;
+    opacity: 0;
+    transform: translateY(20px); /* Смещение вниз */
+    transition: all 1.2s ease-out;
+}
+
+/* Состояние таймера при появлении */
+#timer.show {
+    opacity: 1;
+    transform: translateY(0); /* Возвращается на место */
+}
+
+/* Плавный уход первой кнопки */
+#start-container {
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+#start-container.fade-in {
+    opacity: 1;
+}
