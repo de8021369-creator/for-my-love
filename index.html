@@ -8,24 +8,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <audio id="type-sound" src="type-sound.mp3" preload="auto"></audio>
+
+    <div id="overlay-start" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; color: #ff80ab; display: flex; justify-content: center; align-items: center; z-index: 9999; cursor: pointer; font-family: 'Caveat', cursive; font-size: 2em;">
+        Нажми на экран, чтобы открыть послание... ❤️
+    </div>
+
     <div id="main-content">
         <div id="glow-background"></div> 
-        
         <div id="intro-screen">
             <div id="typewriter"></div>
         </div>
-
         <canvas id="heartCanvas"></canvas>
-        
         <div id="start-container" class="hidden-logic">
             <div id="start-heart">❤️</div>
             <div id="click-me">Жмяк сюда</div>
         </div>
-
         <div id="text-overlay" class="hidden">
             <h1 id="headline">Моя дорогая...</h1>
             <div id="messages-area"></div>
-            
             <button id="show-timer-btn" class="hidden-logic">Сколько дней мы вместе? ✨</button>
             <div id="timer" class="hidden-logic"></div>
             <button id="reset-btn" class="hidden-logic">Посмотреть еще раз ❤️</button>
